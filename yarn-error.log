@@ -1,0 +1,32 @@
+Arguments: 
+  /home/debora/.nvm/versions/node/v16.17.0/bin/node /home/debora/.nvm/versions/node/v16.17.0/bin/yarn add typescript ts-node-dev @types/express -D
+
+PATH: 
+  /home/debora/.nvm/versions/node/v16.17.0/bin:/home/debora/.local/share/zinit/polaris/bin:/home/debora/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.17.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: connect EHOSTUNREACH 104.16.27.34:443
+      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1247:16)
+
+npm manifest: 
+  {
+    "name": "desafio-avmb",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
