@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { getUserId, getUserRepositories } from '../controllers/usuario';
+import { getUserId, getUserRepositories } from '../../controllers/usuario';
 
 
 const usuarioRouter: Router = express.Router();

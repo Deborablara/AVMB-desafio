@@ -5,7 +5,7 @@ import {
   getEnvelopesByRepoId,
   newEnvelope,
   viewEnvelope
-} from '../services/envelope';
+} from '../../services/envelope';
 
 
 export const createEnvelope = async (req: Request, res: Response) => {

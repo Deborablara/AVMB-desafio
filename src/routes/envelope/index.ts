@@ -5,7 +5,7 @@ import {
   forwardEnvelopeForSignature,
   getEnvelope,
   getEnvelopesByRepo
-} from '../controllers/envelope';
+} from '../../controllers/envelope';
 
 
 const envelopeRouter: Router = express.Router();

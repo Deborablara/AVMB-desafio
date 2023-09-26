@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getId, getUserRepos } from '../services/usuario';
+import { getId, getUserRepos } from '../../services/usuario';
 
 
 export const getUserId = async (req: Request, res: Response) => {
