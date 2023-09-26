@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { APIData, APIResponse } from './types/types';
+import { APIData, APIResponse } from './types/api';
 import { apiURL, formatData } from '../utils/api';
 
 
