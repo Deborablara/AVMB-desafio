@@ -1,17 +1,8 @@
 -- CreateTable
-CREATE TABLE "repositorios" (
-    "id" TEXT NOT NULL,
-    "id_repo_api" INTEGER NOT NULL,
-    "nome" TEXT NOT NULL,
-
-    CONSTRAINT "repositorios_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "envelopes" (
     "id" TEXT NOT NULL,
-    "id_envelope_api" INTEGER NOT NULL,
-    "id_repositorio" TEXT NOT NULL,
+    "id_envelope_api" TEXT NOT NULL,
+    "id_repositorio_api" TEXT NOT NULL,
     "descricao" TEXT NOT NULL,
     "conteudo" TEXT NOT NULL,
     "criado_em" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -50,9 +41,6 @@ CREATE TABLE "envelopes_signatarios" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "repositorios_nome_key" ON "repositorios"("nome");
-
--- CreateIndex
 CREATE UNIQUE INDEX "envelopes_id_envelope_api_key" ON "envelopes"("id_envelope_api");
 
 -- CreateIndex
@@ -60,9 +48,6 @@ CREATE UNIQUE INDEX "signatarios_id_signatario_api_key" ON "signatarios"("id_sig
 
 -- CreateIndex
 CREATE UNIQUE INDEX "signatarios_email_key" ON "signatarios"("email");
-
--- AddForeignKey
-ALTER TABLE "envelopes" ADD CONSTRAINT "envelopes_id_repositorio_fkey" FOREIGN KEY ("id_repositorio") REFERENCES "repositorios"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "documentos" ADD CONSTRAINT "documentos_id_envelope_fkey" FOREIGN KEY ("id_envelope") REFERENCES "envelopes"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

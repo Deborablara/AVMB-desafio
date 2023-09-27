@@ -8,20 +8,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Repositorio {
-  id String @id @default(uuid())
-  id_repo_api Int
-  nome String @unique
-  envelope Envelope[]
-
-  @@map("repositorios")
-}
 
 model Envelope {
   id String @id @default(uuid())
-  id_envelope_api Int @unique
-  repositorio Repositorio @relation(fields: [id_repositorio], references: [id])
-  id_repositorio String
+  id_envelope_api String @unique
+  id_repositorio_api String
   descricao String 
   conteudo String
   criado_em DateTime @default(now())

@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { APIData, APIResponse } from '../types/api';
+import { APIData, APIResponse, EnvelopeApiResponse } from '../types/api';
 import { apiURL, formatData } from '../../utils/api';
+import { createEnvelopeInDatabase } from '../../database/envelope';
 
 
 
@@ -16,6 +17,7 @@ export const newEnvelope = async (data: APIData): Promise<APIResponse> => {
     });
 
     if (response.status === 200) {
+      createEnvelopeInDatabase(response.data);
       return {
         status: response.status,
         data: response.data,
@@ -29,7 +31,7 @@ export const newEnvelope = async (data: APIData): Promise<APIResponse> => {
   }
 };
 
-export const viewEnvelope = async (data: APIData): Promise<APIResponse> => {
+export const viewEnvelope = async (data: APIData): Promise<EnvelopeApiResponse> => {
   try {
     const url = `${apiURL}getDadosEnvelope`;
     const formattedData = formatData(data);
