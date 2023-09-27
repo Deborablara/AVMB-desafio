@@ -1,10 +1,15 @@
 import express, { Router } from 'express';
-import { getUserId, getUserRepositories } from '../../controllers/usuario';
+import {
+  getUserData,
+  getUserId,
+  getUserRepositories
+} from '../../controllers/usuario';
 
 
 const usuarioRouter: Router = express.Router();
 
-usuarioRouter.get('/id', getUserId);
+usuarioRouter.post('/id', getUserId);
+usuarioRouter.post('/', getUserData);
 usuarioRouter.post('/repositorios', getUserRepositories);
 
 export default usuarioRouter;

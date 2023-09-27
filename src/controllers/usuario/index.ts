@@ -1,12 +1,23 @@
 import { Request, Response } from 'express';
-import { getId, getUserRepos } from '../../services/usuario';
+import { getId, getUserRepos, getUsuario } from '../../services/usuario';
 
 
 export const getUserId = async (req: Request, res: Response) => {
   try {
     const requestData = req.body;
-    const envelopeData = await getId(requestData);
-    res.status(200).json(envelopeData);
+    const userIdData = await getId(requestData);
+    res.status(200).json(userIdData);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+export const getUserData = async (req: Request, res: Response) => {
+  try {
+    const requestData = req.body;
+    const userData = await getUsuario(requestData);
+    res.status(200).json(userData);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -15,8 +26,8 @@ export const getUserId = async (req: Request, res: Response) => {
 export const getUserRepositories = async (req: Request, res: Response) => {
   try {
     const requestData = req.body;
-    const envelopeData = await getUserRepos(requestData);
-    res.status(200).json(envelopeData);
+    const repositoriosData = await getUserRepos(requestData);
+    res.status(200).json(repositoriosData);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
