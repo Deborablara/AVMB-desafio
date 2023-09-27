@@ -8,6 +8,6 @@ export interface IEnvelope {
     Repositorio?: {
       id?: String
     },
-    status?: number
+    status?: String
   }
 }
