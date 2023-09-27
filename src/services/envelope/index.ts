@@ -17,7 +17,7 @@ export const newEnvelope = async (data: APIData): Promise<APIResponse> => {
     });
 
     if (response.status === 200) {
-      createEnvelopeInDatabase(response.data);
+      await createEnvelopeInDatabase(response.data);
       return {
         status: response.status,
         data: response.data,
