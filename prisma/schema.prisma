@@ -18,7 +18,6 @@ model Envelope {
   criado_em DateTime @default(now())
   status String
   documentos Documento[] 
-  envelopes_signatario Envelope_signatario[]
 
 
   @@map("envelopes")
@@ -35,24 +34,3 @@ model Documento {
   @@map("documentos")
 }
 
-model Signatario {
-  id String @id @default(uuid())
-  id_signatario_api String @unique
-  nome String
-  email String @unique
-  envelope_signatario Envelope_signatario[] 
-
-  @@map("signatarios")
-}
-
-model Envelope_signatario {
-  id String @id @default(uuid())
-  signatario Signatario @relation(fields: [id_signatario], references: [id]) 
-  id_signatario String
-  envelope Envelope @relation(fields: [id_envelope], references: [id]) 
-  id_envelope String
-
-
-
-  @@map("envelopes_signatarios")
-}
