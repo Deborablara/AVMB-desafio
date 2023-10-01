@@ -26,7 +26,7 @@ model Envelope {
 
 model Documento {
   id String @id @default(uuid())
-  envelope Envelope @relation(fields: [id_envelope], references: [id])
+  envelope Envelope @relation(fields: [id_envelope], references: [id_envelope_api])
   id_envelope String
   nome_arquivo String 
   conteudo String

@@ -45,9 +45,8 @@ export const getUsuario = async (data: any) => {
 export const getUserRepos = async (data: any) => {
   try {
     const url: string = `${apiURL}getRepositoriosDoUsuario`;
-    const formattedData = formatData(data);
 
-    const response = await axios.post(url, formattedData, {
+    const response = await axios.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
       },

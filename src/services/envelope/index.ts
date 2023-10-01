@@ -58,9 +58,8 @@ export const viewEnvelope = async (data: APIData): Promise<EnvelopeApiResponse> 
 export const getEnvelopesByRepoId = async (data: APIData): Promise<APIResponse> => {
   try {
     const url = `${apiURL}getEnvelopesByRepositorioOuPasta`;
-    const formattedData = formatData(data);
 
-    const response: AxiosResponse = await axios.post(url, formattedData, {
+    const response: AxiosResponse = await axios.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -106,9 +105,8 @@ export const addSignatario = async (data: APIData): Promise<APIResponse> => {
 export const forwardForSignature = async (data: APIData): Promise<APIResponse> => {
   try {
     const url = `${apiURL}encaminharEnvelopeParaAssinaturas`;
-    const formattedData = formatData(data);
 
-    const response: AxiosResponse = await axios.post(url, formattedData, {
+    const response: AxiosResponse = await axios.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -126,3 +124,5 @@ export const forwardForSignature = async (data: APIData): Promise<APIResponse> =
     throw new Error(error.response.data.error);
   }
 };
+
+
