@@ -7,8 +7,7 @@ import { FormEnvelopeData } from './types';
 
 
 export const newEnvelope = async (data: FormEnvelopeData): Promise<APIResponse> => {
-  const doc = data.params.Envelope.listaDocumentos.Documento;
-  console.log(doc);
+  const doc = data.params.Envelope.listaDocumentos;
   try {
     const url = `${apiURL}inserirEnvelope`;
     const response: AxiosResponse = await axios.post(url, data, {

@@ -46,7 +46,6 @@ export async function createDocumentoInDatabase(documentoData, id_envelope) {
     conteudo: doc.conteudo,
     mimeType: doc.mimeType,
   };
-  console.log(documentoCreateInput);
 
 
   try {
