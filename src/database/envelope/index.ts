@@ -59,3 +59,18 @@ export async function createDocumentoInDatabase(documentoData, id_envelope) {
     throw new Error('Falha ao criar documento no banco de dados');
   }
 }
+
+export async function getDocumentoByEnvelopeId(idEnvelope: string) {
+  try {
+    const documento = await prisma.documento.findFirst({
+      where: {
+        id_envelope: idEnvelope,
+      },
+    });
+
+    return documento;
+  } catch (error) {
+    throw new Error('Erro ao buscar documento por ID de envelope: ' + error.message);
+  }
+}
+

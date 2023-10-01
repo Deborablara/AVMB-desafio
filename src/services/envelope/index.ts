@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { APIData, APIResponse, EnvelopeApiResponse } from '../types/api';
 import { apiURL, formatData } from '../../utils/api';
-import { createDocumentoInDatabase, createEnvelopeInDatabase } from '../../database/envelope';
+import { createDocumentoInDatabase, createEnvelopeInDatabase, getDocumentoByEnvelopeId } from '../../database/envelope';
 import fs from 'fs';
 import { FormEnvelopeData } from './types';
 
@@ -143,6 +143,23 @@ export const processUploadDocumento = (file: Express.Multer.File): Promise<any> 
     });
   });
 };
+
+
+export const buscarDocumento = async (envelope_id: string): Promise<APIResponse> => {
+  try {
+    const documentos = await getDocumentoByEnvelopeId(envelope_id);
+
+    return {
+      status: 200,
+      data: documentos,
+    };
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+
+
 
 
 

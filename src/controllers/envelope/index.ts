@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import {
   addSignatario,
+  buscarDocumento,
   forwardForSignature,
   getEnvelopesByRepoId,
   newEnvelope,
@@ -72,6 +73,16 @@ export const uploadDocumento = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     res.status(500).send('Erro ao processar o arquivo.');
+  }
+};
+
+export const buscarDocumentoByEnvelopeId = async (req: Request, res: Response) => {
+  try {
+    const requestData = req.body;
+    const documento = await buscarDocumento(requestData.params.envelope_id);
+    res.status(200).json(documento);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 

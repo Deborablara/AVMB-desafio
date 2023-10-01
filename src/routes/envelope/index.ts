@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 import {
   addSignatarioToEnvelope,
+  buscarDocumentoByEnvelopeId,
   createEnvelope,
   forwardEnvelopeForSignature,
   getEnvelope,
@@ -18,5 +19,6 @@ envelopeRouter.post('/by-repo', getEnvelopesByRepo);
 envelopeRouter.post('/signatario', addSignatarioToEnvelope);
 envelopeRouter.post('/forward-for-signature', forwardEnvelopeForSignature);
 envelopeRouter.post('/upload', upload.single('file'), uploadDocumento);
+envelopeRouter.post('/documento', buscarDocumentoByEnvelopeId);
 
 export default envelopeRouter;
