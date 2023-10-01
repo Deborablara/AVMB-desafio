@@ -4,6 +4,7 @@ import {
   buscarDocumento,
   forwardForSignature,
   getEnvelopesByRepoId,
+  getSignatariosById,
   newEnvelope,
   processUploadDocumento,
   viewEnvelope
@@ -24,6 +25,16 @@ export const getEnvelope = async (req: Request, res: Response) => {
   try {
     const requestData = req.body;
     const envelopeData = await viewEnvelope(requestData);
+    res.status(200).json(envelopeData);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const getSignatariosByEnvelope = async (req: Request, res: Response) => {
+  try {
+    const requestData = req.body;
+    const envelopeData = await getSignatariosById(requestData);
     res.status(200).json(envelopeData);
   } catch (error) {
     res.status(500).json({ error: error.message });

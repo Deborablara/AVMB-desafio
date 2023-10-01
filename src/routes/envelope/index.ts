@@ -6,6 +6,7 @@ import {
   forwardEnvelopeForSignature,
   getEnvelope,
   getEnvelopesByRepo,
+  getSignatariosByEnvelope,
   uploadDocumento
 } from '../../controllers/envelope';
 import upload from '../../config/upload';
@@ -20,5 +21,6 @@ envelopeRouter.post('/signatario', addSignatarioToEnvelope);
 envelopeRouter.post('/forward-for-signature', forwardEnvelopeForSignature);
 envelopeRouter.post('/upload', upload.single('file'), uploadDocumento);
 envelopeRouter.post('/documento', buscarDocumentoByEnvelopeId);
+envelopeRouter.post('/signatarios', getSignatariosByEnvelope);
 
 export default envelopeRouter;

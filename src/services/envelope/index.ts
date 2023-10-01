@@ -35,9 +35,31 @@ export const newEnvelope = async (data: FormEnvelopeData): Promise<APIResponse> 
 export const viewEnvelope = async (data: APIData): Promise<EnvelopeApiResponse> => {
   try {
     const url = `${apiURL}getDadosEnvelope`;
-    const formattedData = formatData(data);
 
-    const response: AxiosResponse = await axios.post(url, formattedData, {
+    const response: AxiosResponse = await axios.post(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.status === 200) {
+      return {
+        status: response.status,
+        data: response.data,
+      };
+    } else {
+      throw new Error(JSON.stringify(response.data));
+    }
+  } catch (error) {
+    throw new Error(error.response.data.error);
+  }
+};
+
+export const getSignatariosById = async (data: APIData): Promise<EnvelopeApiResponse> => {
+  try {
+    const url = `${apiURL}getSignatariosPorEnvelope`;
+
+    const response: AxiosResponse = await axios.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -82,9 +104,8 @@ export const getEnvelopesByRepoId = async (data: APIData): Promise<APIResponse> 
 export const addSignatario = async (data: APIData): Promise<APIResponse> => {
   try {
     const url = `${apiURL}inserirSignatarioEnvelope`;
-    const formattedData = formatData(data);
 
-    const response: AxiosResponse = await axios.post(url, formattedData, {
+    const response: AxiosResponse = await axios.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
       },
