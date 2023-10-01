@@ -37,4 +37,25 @@ export const createEnvelopeInDatabase = async (data: APIData) => {
   }
 };
 
+export async function createDocumentoInDatabase(documentoData, id_envelope) {
+  const doc = documentoData.Documento[0];
 
+  const documentoCreateInput = {
+    id_envelope: id_envelope,
+    nome_arquivo: doc.nomeArquivo,
+    conteudo: doc.conteudo,
+    mimeType: doc.mimeType,
+  };
+  console.log(documentoCreateInput);
+
+
+  try {
+    const documento = await prisma.documento.create({
+      data: documentoCreateInput,
+    });
+
+    return documento;
+  } catch (error) {
+    throw new Error('Falha ao criar documento no banco de dados');
+  }
+}

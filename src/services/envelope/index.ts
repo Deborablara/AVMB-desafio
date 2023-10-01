@@ -1,14 +1,14 @@
 import axios, { AxiosResponse } from 'axios';
 import { APIData, APIResponse, EnvelopeApiResponse } from '../types/api';
 import { apiURL, formatData } from '../../utils/api';
-import { createEnvelopeInDatabase } from '../../database/envelope';
+import { createDocumentoInDatabase, createEnvelopeInDatabase } from '../../database/envelope';
 import fs from 'fs';
+import { FormEnvelopeData } from './types';
 
 
-
-
-
-export const newEnvelope = async (data: APIData): Promise<APIResponse> => {
+export const newEnvelope = async (data: FormEnvelopeData): Promise<APIResponse> => {
+  const doc = data.params.Envelope.listaDocumentos.Documento;
+  console.log(doc);
   try {
     const url = `${apiURL}inserirEnvelope`;
     const response: AxiosResponse = await axios.post(url, data, {
@@ -19,6 +19,7 @@ export const newEnvelope = async (data: APIData): Promise<APIResponse> => {
 
     if (response.status === 200) {
       await createEnvelopeInDatabase(response.data);
+      await createDocumentoInDatabase(doc, response.data.response.data.idEnvelope);
       return {
         status: response.status,
         data: response.data,

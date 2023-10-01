@@ -30,7 +30,7 @@ model Documento {
   id_envelope String
   nome_arquivo String 
   conteudo String
-
+  mimeType String
 
   @@map("documentos")
 }
