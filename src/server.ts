@@ -22,20 +22,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-
-const upload = multer({ dest: 'uploads' });
-
-
-app.post('/api/upload', upload.single('file'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).send('Nenhum arquivo foi enviado.');
-  }
-  res.send('Arquivo enviado com sucesso.');
-});
-
-
-
-
 app.use(cors(corsOptions));
 
 app.use('/api/envelopes', envelopeRouter);

@@ -2,6 +2,8 @@ import axios, { AxiosResponse } from 'axios';
 import { APIData, APIResponse, EnvelopeApiResponse } from '../types/api';
 import { apiURL, formatData } from '../../utils/api';
 import { createEnvelopeInDatabase } from '../../database/envelope';
+import fs from 'fs';
+
 
 
 
@@ -124,5 +126,23 @@ export const forwardForSignature = async (data: APIData): Promise<APIResponse> =
     throw new Error(error.response.data.error);
   }
 };
+
+
+export const processUploadDocumento = (file: Express.Multer.File): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    const nomeArquivo = file.originalname;
+    const mimeType = file.mimetype;
+
+    fs.readFile(file.path, (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        const conteudo = Buffer.from(data).toString('base64');
+        resolve({ nomeArquivo, mimeType, conteudo });
+      }
+    });
+  });
+};
+
 
 

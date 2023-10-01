@@ -4,6 +4,7 @@ import {
   forwardForSignature,
   getEnvelopesByRepoId,
   newEnvelope,
+  processUploadDocumento,
   viewEnvelope
 } from '../../services/envelope';
 
@@ -57,3 +58,20 @@ export const forwardEnvelopeForSignature = async (req: Request, res: Response) =
     res.status(500).json({ error: error.message });
   }
 };
+
+export const uploadDocumento = async (req: Request, res: Response) => {
+  if (!req.file) {
+    return res.status(400).send('Nenhum arquivo foi enviado.');
+  }
+  try {
+    const fileInfo = await processUploadDocumento(req.file);
+    res.status(200).json({
+      message: 'Arquivo enviado com sucesso',
+      fileInfo: fileInfo,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao processar o arquivo.');
+  }
+};
+
