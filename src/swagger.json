@@ -55,6 +55,410 @@
           }
         }
       }
+    },
+    "/api/usuario/": {
+      "post": {
+        "summary": "Obtém informações do usuário com base nos id fornecido",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "Token de integração de API do usuário fornecido na plataforma asten"
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "idUsuario": {
+                        "type": "string",
+                        "description": "ID do usuário"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "token",
+                  "params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Usuario": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "codigo": {
+                          "type": "string"
+                        },
+                        "nome": {
+                          "type": "string"
+                        },
+                        "iniciais": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "ativo": {
+                          "type": "string"
+                        },
+                        "contaVerificada": {
+                          "type": "string"
+                        },
+                        "celular": {
+                          "type": "string"
+                        },
+                        "empresa": {
+                          "type": "string"
+                        },
+                        "cargo": {
+                          "type": "string"
+                        },
+                        "imgAssinatura": {
+                          "type": "string"
+                        },
+                        "imgAssinaturaExt": {
+                          "type": "string"
+                        },
+                        "imgRubrica": {
+                          "type": "string"
+                        },
+                        "imgRubricaExt": {
+                          "type": "string"
+                        },
+                        "cpf": {
+                          "type": "string"
+                        },
+                        "perfilUsuario": {
+                          "type": "string"
+                        },
+                        "receberLinkAssinatura": {
+                          "type": "string"
+                        },
+                        "receberNotifConclusao": {
+                          "type": "string"
+                        },
+                        "receberNotifPendente": {
+                          "type": "string"
+                        },
+                        "receberNoticias": {
+                          "type": "string"
+                        },
+                        "utilizaAutenticacao2FA": {
+                          "type": "string"
+                        },
+                        "imgAutenticacao2FA": {
+                          "type": "string"
+                        },
+                        "imgFoto": {
+                          "type": "string"
+                        },
+                        "exibeAvisoEnvelope": {
+                          "type": "string"
+                        },
+                        "acessoAPI": {
+                          "type": "string"
+                        },
+                        "tokenAPI": {
+                          "type": "string"
+                        },
+                        "urlCallback": {
+                          "type": "string"
+                        },
+                        "ignorarPlanoAssin": {
+                          "type": "string"
+                        },
+                        "googleAccId": {
+                          "type": "string"
+                        },
+                        "ldapAccountName": {
+                          "type": "string"
+                        },
+                        "dataHoraCadastro": {
+                          "type": "string"
+                        },
+                        "saldoDisponivelWorkflow": {
+                          "type": "string"
+                        },
+                        "limiteCards": {
+                          "type": "string"
+                        },
+                        "PlanoContratado": {
+                          "type": "string"
+                        },
+                        "limiteEnvelopes": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/usuario/repositorios": {
+      "post": {
+        "summary": "Obtém os repositórios do usuário com base nos parâmetros fornecidos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "Token de integração de API do usuário fornecido na plataforma asten"
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "idProprietario": {
+                        "type": "string",
+                        "description": "ID do proprietário dos repositórios"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "token",
+                  "params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "Usuario": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "nome": {
+                        "type": "string"
+                      },
+                      "compartilharCriacaoDocs": {
+                        "type": "string"
+                      },
+                      "compartilharVisualizacaoDocs": {
+                        "type": "string"
+                      },
+                      "ocultarEmailSignatarios": {
+                        "type": "string"
+                      },
+                      "nomeRemetente": {
+                        "type": "string"
+                      },
+                      "opcaoValidCodigo": {
+                        "type": "string"
+                      },
+                      "opcaoValidCertICP": {
+                        "type": "string"
+                      },
+                      "opcaoValidDocFoto": {
+                        "type": "string"
+                      },
+                      "opcaoValidDocSelfie": {
+                        "type": "string"
+                      },
+                      "opcaoValidTokenSMS": {
+                        "type": "string"
+                      },
+                      "opcaoValidLogin": {
+                        "type": "string"
+                      },
+                      "opcaoValidReconhecFacial": {
+                        "type": "string"
+                      },
+                      "opcaoValidPix": {
+                        "type": "string"
+                      },
+                      "lembrarAssinPendentes": {
+                        "type": "string"
+                      },
+                      "dataHoraCriacao": {
+                        "type": "string"
+                      },
+                      "isProprietario": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/repositorios/id": {
+      "post": {
+        "summary": "Obtém um repositório com base nos parâmetros fornecidos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "Token de integração de API do usuário fornecido na plataforma asten"
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "idRepositorio": {
+                        "type": "string",
+                        "description": "ID do repositório a ser recuperado"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "token",
+                  "params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "descricao": {
+                                "type": "string"
+                              },
+                              "dataHoraCriacao": {
+                                "type": "string"
+                              },
+                              "dataHoraAlteracao": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              },
+                              "numeroPaginas": {
+                                "type": "string"
+                              },
+                              "hashSHA256": {
+                                "type": "string"
+                              },
+                              "permitirDownload": {
+                                "type": "string"
+                              },
+                              "permitirResetarExpiracao": {
+                                "type": "string"
+                              },
+                              "permitirAlterarExpiracao": {
+                                "type": "string"
+                              },
+                              "permitirRestaurarDaLixeira": {
+                                "type": "string"
+                              },
+                              "permitirEnvioParaLixeira": {
+                                "type": "string"
+                              },
+                              "permitirDespachos": {
+                                "type": "string"
+                              },
+                              "emAcompanhamento": {
+                                "type": "string"
+                              },
+                              "tipoOrigem": {
+                                "type": "string"
+                              },
+                              "Usuario": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "nome": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "statusContrato": {
+                                "type": "string"
+                              },
+                              "numContrato": {
+                                "type": "string"
+                              },
+                              "listaTags": {
+                                "type": "string"
+                              },
+                              "permiteArquivar": {
+                                "type": "string"
+                              },
+                              "permiteCancelar": {
+                                "type": "string"
+                              },
+                              "statusColor": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
