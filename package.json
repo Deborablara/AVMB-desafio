@@ -24,6 +24,8 @@
     "formidable": "^3.5.1",
     "multer": "^1.4.5-lts.1",
     "prisma": "^5.3.1",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   }
 }

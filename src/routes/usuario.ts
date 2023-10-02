@@ -3,7 +3,7 @@ import {
   getUserData,
   getUserId,
   getUserRepositories
-} from '../../controllers/usuario';
+} from '../controllers/usuario';
 
 
 const usuarioRouter: Router = express.Router();

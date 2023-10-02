@@ -2,10 +2,12 @@ import "reflect-metadata";
 import express from 'express';
 import cors from 'cors';
 import bodyParser from "body-parser";
+import swaggerUI from 'swagger-ui-express';
+import swaggerJsDoc from 'swagger-jsdoc';
 import envelopeRouter from "./routes/envelope";
 import usuarioRouter from "./routes/usuario";
-import multer from 'multer';
 import repositorioRouter from "./routes/repositorio";
+import swaggerConfig from "./swagger.json";
 
 const app = express();
 const port = 8080;
@@ -15,6 +17,9 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 };
+
+
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerConfig))
 
 
 

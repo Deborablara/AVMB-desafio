@@ -8,8 +8,8 @@ import {
   getEnvelopesByRepo,
   getSignatariosByEnvelope,
   uploadDocumento
-} from '../../controllers/envelope';
-import upload from '../../config/upload';
+} from '../controllers/envelope';
+import upload from '../config/upload';
 
 
 const envelopeRouter: Router = express.Router();
