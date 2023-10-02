@@ -4,9 +4,3 @@ const token = '274O5Td6rsR5QypP2huHk2OOJfr1FyeQ79p1tt3JCiIoH93GbnkwxF6S60yFQoZwY
 
 export const apiURL = 'https://plataforma.astenassinatura.com.br/api/';
 
-export const formatData = (data: APIData): APIData => {
-  return {
-    token: token,
-    params: data,
-  };
-};

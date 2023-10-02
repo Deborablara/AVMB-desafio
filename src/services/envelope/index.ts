@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { APIData, APIResponse, EnvelopeApiResponse } from '../types/api';
-import { apiURL, formatData } from '../../utils/api';
+import { apiURL } from '../../utils/api';
 import { createDocumentoInDatabase, createEnvelopeInDatabase, getDocumentoByEnvelopeId } from '../../database/envelope';
 import fs from 'fs';
 import { FormEnvelopeData } from './types';
@@ -17,7 +17,7 @@ export const newEnvelope = async (data: FormEnvelopeData): Promise<APIResponse> 
     });
 
     if (response.status === 200) {
-      await createEnvelopeInDatabase(response.data);
+      await createEnvelopeInDatabase(response.data, data.token);
       await createDocumentoInDatabase(doc, response.data.response.data.idEnvelope);
       return {
         status: response.status,

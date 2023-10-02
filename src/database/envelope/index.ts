@@ -4,9 +4,16 @@ import { APIData, APIResponse } from "../../services/types/api";
 
 
 
-const formatEnvelopeData = async (idEnvelope: number) => {
+const formatEnvelopeData = async (idEnvelope: number, token: string) => {
+  const format = {
+    token,
+    params: {
+      idEnvelope: idEnvelope,
+    }
+  };
+
   try {
-    const envelopeDetailsData = await viewEnvelope({ idEnvelope });
+    const envelopeDetailsData = await viewEnvelope(format);
     const envelopeData = envelopeDetailsData.data.response;
 
 
@@ -25,9 +32,9 @@ const formatEnvelopeData = async (idEnvelope: number) => {
 };
 
 
-export const createEnvelopeInDatabase = async (data: APIData) => {
+export const createEnvelopeInDatabase = async (data: APIData, token: string) => {
   try {
-    const formattedData = await formatEnvelopeData(data.response.data.idEnvelope);
+    const formattedData = await formatEnvelopeData(data.response.data.idEnvelope, token);
 
     await prisma.envelope.create({
       data: formattedData,

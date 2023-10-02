@@ -459,6 +459,954 @@
           }
         }
       }
+    },
+    "/api/envelopes/new": {
+      "post": {
+        "summary": "Cria um novo envelope",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "Token de integração da API do usuário fornecido na plataforma Asten"
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "Envelope": {
+                        "type": "object",
+                        "properties": {
+                          "descricao": {
+                            "type": "string",
+                            "description": "Descrição do envelope"
+                          },
+                          "Repositorio": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "ID do repositório"
+                              }
+                            },
+                            "required": [
+                              "id"
+                            ]
+                          },
+                          "listaDocumentos": {
+                            "type": "object",
+                            "properties": {
+                              "Documento": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "conteudo": {
+                                      "type": "string",
+                                      "description": "Conteúdo do documento"
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "description": "Tipo MIME do documento"
+                                    },
+                                    "nomeArquivo": {
+                                      "type": "string",
+                                      "description": "Nome do arquivo do documento"
+                                    }
+                                  },
+                                  "required": [
+                                    "conteudo",
+                                    "mimeType",
+                                    "nomeArquivo"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "required": [
+                          "descricao",
+                          "Repositorio",
+                          "listaDocumentos"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "token",
+                  "params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "mensagem": {
+                          "type": "string",
+                          "description": "Mensagem de sucesso"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "listaAvisos": {
+                              "type": "object",
+                              "properties": {
+                                "aviso": {
+                                  "type": "object",
+                                  "properties": {
+                                    "tipo": {
+                                      "type": "string",
+                                      "description": "Tipo de aviso"
+                                    },
+                                    "mensagem": {
+                                      "type": "string",
+                                      "description": "Mensagem de aviso"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "idEnvelope": {
+                              "type": "string",
+                              "description": "ID do envelope criado"
+                            },
+                            "hashSHA256": {
+                              "type": "string",
+                              "description": "Hash SHA256 do envelope"
+                            }
+                          },
+                          "required": [
+                            "listaAvisos",
+                            "idEnvelope",
+                            "hashSHA256"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/envelopes/view": {
+      "post": {
+        "summary": "Recupera detalhes de um envelope existente",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "Token de integração da API do usuário fornecido na plataforma Asten"
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "idEnvelope": {
+                        "type": "string",
+                        "description": "ID do envelope a ser visualizado"
+                      }
+                    },
+                    "required": [
+                      "idEnvelope"
+                    ]
+                  }
+                },
+                "required": [
+                  "token",
+                  "params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID do envelope"
+                        },
+                        "Repositorio": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "ID do repositório associado ao envelope"
+                            }
+                          }
+                        },
+                        "Usuario": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "ID do usuário associado ao envelope"
+                            }
+                          }
+                        },
+                        "descricao": {
+                          "type": "string",
+                          "description": "Descrição do envelope"
+                        },
+                        "conteudo": {
+                          "type": "string",
+                          "description": "Conteúdo do envelope"
+                        },
+                        "incluirHashTodasPaginas": {
+                          "type": "string",
+                          "description": "Indica se deve incluir o hash de todas as páginas"
+                        },
+                        "permitirDespachos": {
+                          "type": "string",
+                          "description": "Indica se os despachos são permitidos"
+                        },
+                        "usarOrdem": {
+                          "type": "string",
+                          "description": "Indica se deve ser usada ordem"
+                        },
+                        "hashSHA256": {
+                          "type": "string",
+                          "description": "Hash SHA256 do envelope"
+                        },
+                        "hashSHA512": {
+                          "type": "string",
+                          "description": "Hash SHA512 do envelope"
+                        },
+                        "mensagem": {
+                          "type": "string",
+                          "description": "Mensagem de abertura do envelope"
+                        },
+                        "mensagemObservadores": {
+                          "type": "string",
+                          "description": "Mensagem para observadores do envelope"
+                        },
+                        "motivoCancelamento": {
+                          "type": "string",
+                          "description": "Motivo de cancelamento do envelope"
+                        },
+                        "numeroPaginas": {
+                          "type": "string",
+                          "description": "Número de páginas no envelope"
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "Status do envelope"
+                        },
+                        "dataExpiracao": {
+                          "type": "string",
+                          "description": "Data de expiração do envelope"
+                        },
+                        "horaExpiracao": {
+                          "type": "string",
+                          "description": "Hora de expiração do envelope"
+                        },
+                        "dataHoraCriacao": {
+                          "type": "string",
+                          "description": "Data e hora de criação do envelope"
+                        },
+                        "dataHoraConclusao": {
+                          "type": "string",
+                          "description": "Data e hora de conclusão do envelope"
+                        },
+                        "dataHoraAlteracao": {
+                          "type": "string",
+                          "description": "Data e hora de alteração do envelope"
+                        },
+                        "objetoContrato": {
+                          "type": "string",
+                          "description": "Objeto do contrato"
+                        },
+                        "statusContrato": {
+                          "type": "string",
+                          "description": "Status do contrato"
+                        },
+                        "numContrato": {
+                          "type": "string",
+                          "description": "Número do contrato"
+                        },
+                        "descricaoContratante": {
+                          "type": "string",
+                          "description": "Descrição do contratante"
+                        },
+                        "descricaoContratado": {
+                          "type": "string",
+                          "description": "Descrição do contratado"
+                        },
+                        "bloquearDesenhoPaginas": {
+                          "type": "string",
+                          "description": "Indica se o desenho das páginas está bloqueado"
+                        },
+                        "Envelope": {
+                          "type": "string",
+                          "description": "Informações adicionais do envelope"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/envelopes/by-repo": {
+      "post": {
+        "summary": "Obtém uma lista de envelopes por repositório",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "Token de integração da API do usuário fornecido na plataforma Asten"
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "idRepositorio": {
+                        "type": "string",
+                        "description": "ID do repositório para recuperar envelopes"
+                      }
+                    },
+                    "required": [
+                      "idRepositorio"
+                    ]
+                  }
+                },
+                "required": [
+                  "token",
+                  "params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "ID do envelope"
+                          },
+                          "descricao": {
+                            "type": "string",
+                            "description": "Descrição do envelope"
+                          },
+                          "dataHoraCriacao": {
+                            "type": "string",
+                            "description": "Data e hora de criação do envelope"
+                          },
+                          "dataHoraAlteracao": {
+                            "type": "string",
+                            "description": "Data e hora de alteração do envelope"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "Status do envelope"
+                          },
+                          "numeroPaginas": {
+                            "type": "string",
+                            "description": "Número de páginas no envelope"
+                          },
+                          "hashSHA256": {
+                            "type": "string",
+                            "description": "Hash SHA256 do envelope"
+                          },
+                          "permitirDownload": {
+                            "type": "string",
+                            "description": "Indica se o download é permitido"
+                          },
+                          "permitirResetarExpiracao": {
+                            "type": "string",
+                            "description": "Indica se é permitido resetar a expiração"
+                          },
+                          "permitirAlterarExpiracao": {
+                            "type": "string",
+                            "description": "Indica se é permitido alterar a expiração"
+                          },
+                          "permitirRestaurarDaLixeira": {
+                            "type": "string",
+                            "description": "Indica se é permitido restaurar da lixeira"
+                          },
+                          "permitirEnvioParaLixeira": {
+                            "type": "string",
+                            "description": "Indica se é permitido enviar para a lixeira"
+                          },
+                          "permitirDespachos": {
+                            "type": "string",
+                            "description": "Indica se os despachos são permitidos"
+                          },
+                          "emAcompanhamento": {
+                            "type": "string",
+                            "description": "Indica se está em acompanhamento"
+                          },
+                          "tipoOrigem": {
+                            "type": "string",
+                            "description": "Tipo de origem do envelope"
+                          },
+                          "Usuario": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "ID do usuário associado ao envelope"
+                              },
+                              "nome": {
+                                "type": "string",
+                                "description": "Nome do usuário associado ao envelope"
+                              }
+                            }
+                          },
+                          "statusContrato": {
+                            "type": "string",
+                            "description": "Status do contrato"
+                          },
+                          "numContrato": {
+                            "type": "string",
+                            "description": "Número do contrato"
+                          },
+                          "listaTags": {
+                            "type": "string",
+                            "description": "Lista de tags"
+                          },
+                          "permiteArquivar": {
+                            "type": "string",
+                            "description": "Indica se é permitido arquivar"
+                          },
+                          "permiteCancelar": {
+                            "type": "string",
+                            "description": "Indica se é permitido cancelar"
+                          },
+                          "statusColor": {
+                            "type": "string",
+                            "description": "Cor do status"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/envelopes/signatario": {
+      "post": {
+        "summary": "Adiciona um signatário a um envelope",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "Token de integração da API do usuário fornecido na plataforma Asten"
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "SignatarioEnvelope": {
+                        "type": "object",
+                        "properties": {
+                          "Envelope": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "ID do envelope ao qual o signatário será adicionado"
+                              }
+                            }
+                          },
+                          "ConfigAssinatura": {
+                            "type": "object",
+                            "properties": {
+                              "emailSignatario": {
+                                "type": "string",
+                                "description": "Endereço de e-mail do signatário"
+                              },
+                              "nomeSignatario": {
+                                "type": "string",
+                                "description": "Nome do signatário"
+                              }
+                            },
+                            "required": [
+                              "emailSignatario",
+                              "nomeSignatario"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "Envelope",
+                          "ConfigAssinatura"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "SignatarioEnvelope"
+                    ]
+                  }
+                },
+                "required": [
+                  "token",
+                  "params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Código de status da resposta (200 para sucesso)"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "mensagem": {
+                              "type": "string",
+                              "description": "Mensagem de sucesso"
+                            },
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "idSignatarioEnv": {
+                                  "type": "string",
+                                  "description": "ID do signatário do envelope inserido"
+                                },
+                                "listaAvisos": {
+                                  "type": "object",
+                                  "properties": {
+                                    "aviso": {
+                                      "type": "object",
+                                      "properties": {
+                                        "tipo": {
+                                          "type": "string",
+                                          "description": "Tipo de aviso"
+                                        },
+                                        "mensagem": {
+                                          "type": "string",
+                                          "description": "Mensagem de aviso"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/envelopes/forward-for-signature": {
+      "post": {
+        "summary": "Encaminha um envelope para coleta de assinaturas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "Token de integração da API do usuário fornecido na plataforma Asten"
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "Envelope": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "ID do envelope a ser encaminhado para coleta de assinaturas"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "Envelope"
+                    ]
+                  }
+                },
+                "required": [
+                  "token",
+                  "params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Código de status da resposta (200 para sucesso)"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "mensagem": {
+                              "type": "string",
+                              "description": "Mensagem de sucesso"
+                            },
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "xmlns": {
+                                  "type": "string",
+                                  "description": "Namespace da resposta"
+                                },
+                                "listaAvisos": {
+                                  "type": "object",
+                                  "properties": {
+                                    "aviso": {
+                                      "type": "object",
+                                      "properties": {
+                                        "tipo": {
+                                          "type": "string",
+                                          "description": "Tipo de aviso"
+                                        },
+                                        "mensagem": {
+                                          "type": "string",
+                                          "description": "Mensagem de aviso"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/envelopes/documento": {
+      "post": {
+        "summary": "Busca um documento pelo ID do envelope",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "Token de integração da API do usuário fornecido na plataforma Asten"
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "envelope_id": {
+                        "type": "string",
+                        "description": "ID do envelope para o qual deseja buscar o documento"
+                      }
+                    },
+                    "required": [
+                      "envelope_id"
+                    ]
+                  }
+                },
+                "required": [
+                  "token",
+                  "params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Código de status da resposta (200 para sucesso)"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID do documento"
+                        },
+                        "id_envelope": {
+                          "type": "string",
+                          "description": "ID do envelope ao qual o documento pertence"
+                        },
+                        "nome_arquivo": {
+                          "type": "string",
+                          "description": "Nome do arquivo do documento"
+                        },
+                        "conteudo": {
+                          "type": "string",
+                          "description": "Conteúdo do documento"
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "description": "Tipo MIME do documento"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/envelopes/signatarios": {
+      "post": {
+        "summary": "Lista de signatários de um envelope",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "Token de integração da API do usuário fornecido na plataforma Asten"
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "idEnvelope": {
+                        "type": "string",
+                        "description": "ID do envelope para o qual deseja listar os signatários"
+                      }
+                    },
+                    "required": [
+                      "idEnvelope"
+                    ]
+                  }
+                },
+                "required": [
+                  "token",
+                  "params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Código de status da resposta (200 para sucesso)"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "ID do signatário"
+                              },
+                              "Envelope": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "description": "ID do envelope ao qual o signatário pertence"
+                                  }
+                                }
+                              },
+                              "status": {
+                                "type": "string",
+                                "description": "Status do signatário"
+                              },
+                              "ConfigAssinatura": {
+                                "type": "object",
+                                "properties": {}
+                              },
+                              "ordem": {
+                                "type": "string",
+                                "description": "Ordem do signatário"
+                              },
+                              "dataHoraEnvio": {
+                                "type": "string",
+                                "description": "Data e hora de envio"
+                              },
+                              "dataHoraAssinatura": {
+                                "type": "string",
+                                "description": "Data e hora de assinatura"
+                              },
+                              "motivoCancelamento": {
+                                "type": "string",
+                                "description": "Motivo de cancelamento, se aplicável"
+                              },
+                              "emailDelegado": {
+                                "type": "string",
+                                "description": "Email do delegado, se aplicável"
+                              },
+                              "assinaXMLs": {
+                                "type": "string",
+                                "description": "Assina XMLs (S ou N)"
+                              }
+                            }
+                          },
+                          "description": "Lista de signatários do envelope"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/envelopes/upload": {
+      "post": {
+        "summary": "Upload do arquivo",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "file",
+                    "description": "Arquivo a ser enviado"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Mensagem de sucesso"
+                    },
+                    "fileInfo": {
+                      "type": "object",
+                      "properties": {
+                        "nomeArquivo": {
+                          "type": "string",
+                          "description": "Nome do arquivo"
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "description": "Tipo MIME do arquivo"
+                        },
+                        "conteudo": {
+                          "type": "string",
+                          "description": "Conteúdo do arquivo, se aplicável"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

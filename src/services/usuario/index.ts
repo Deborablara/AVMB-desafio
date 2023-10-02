@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { apiURL, formatData } from '../../utils/api';
+import { apiURL, } from '../../utils/api';
 
 
 export const getId = async (data: any) => {
