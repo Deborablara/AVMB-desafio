@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getId, getUserRepos, getUsuario } from '../../services/usuario';
+import { getId, getUserRepos, getUser } from '../../services/usuario';
 
 
 export const getUserId = async (req: Request, res: Response) => {
@@ -16,7 +16,7 @@ export const getUserId = async (req: Request, res: Response) => {
 export const getUserData = async (req: Request, res: Response) => {
   try {
     const requestData = req.body;
-    const userData = await getUsuario(requestData);
+    const userData = await getUser(requestData);
     res.status(200).json(userData);
   } catch (error) {
     res.status(500).json({ error: error.message });

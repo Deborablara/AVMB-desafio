@@ -3,7 +3,6 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from "body-parser";
 import swaggerUI from 'swagger-ui-express';
-import swaggerJsDoc from 'swagger-jsdoc';
 import envelopeRouter from "./routes/envelope";
 import usuarioRouter from "./routes/usuario";
 import repositorioRouter from "./routes/repositorio";
@@ -21,12 +20,9 @@ const corsOptions = {
 
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerConfig))
 
-
-
 app.use(bodyParser.json());
+
 app.use(cors());
-
-
 app.use(cors(corsOptions));
 
 app.use('/api/envelopes', envelopeRouter);

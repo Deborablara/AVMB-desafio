@@ -1,6 +1,6 @@
 import { prisma } from "..";
 import { viewEnvelope } from "../../services/envelope";
-import { APIData, APIResponse } from "../../services/types/api";
+import { APIData } from "../../services/types/api";
 
 
 
@@ -44,8 +44,8 @@ export const createEnvelopeInDatabase = async (data: APIData, token: string) => 
   }
 };
 
-export async function createDocumentoInDatabase(documentoData, id_envelope) {
-  const doc = documentoData.Documento[0];
+export async function createDocumentInDatabase(documentData, id_envelope) {
+  const doc = documentData.Documento[0];
 
   const documentoCreateInput = {
     id_envelope: id_envelope,
@@ -62,11 +62,11 @@ export async function createDocumentoInDatabase(documentoData, id_envelope) {
 
     return documento;
   } catch (error) {
-    throw new Error('Falha ao criar documento no banco de dados');
+    return 'Falha ao criar documento no banco de dados';
   }
 }
 
-export async function getDocumentoByEnvelopeId(idEnvelope: string) {
+export async function getDocumentByEnvelopeId(idEnvelope: string) {
   try {
     const documento = await prisma.documento.findFirst({
       where: {

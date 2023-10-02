@@ -5,7 +5,7 @@ import { apiURL } from '../../utils/api';
 
 
 
-export const getRepositorio = async (data: APIData) => {
+export const getRepository = async (data: APIData) => {
   try {
     const url = `${apiURL}getDadosRepositorio`;
 

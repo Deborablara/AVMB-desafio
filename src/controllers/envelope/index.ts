@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import {
   addSignatario,
-  buscarDocumento,
+  findDocument,
   forwardForSignature,
   getEnvelopesByRepoId,
   getSignatariosById,
   newEnvelope,
-  processUploadDocumento,
+  processUploadDocument,
   viewEnvelope
 } from '../../services/envelope';
 
@@ -15,7 +15,7 @@ export const createEnvelope = async (req: Request, res: Response) => {
   try {
     const requestData = req.body;
     const envelopeData = await newEnvelope(requestData);
-    res.status(200).json(envelopeData);
+    res.status(201).json(envelopeData);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -34,8 +34,8 @@ export const getEnvelope = async (req: Request, res: Response) => {
 export const getSignatariosByEnvelope = async (req: Request, res: Response) => {
   try {
     const requestData = req.body;
-    const envelopeData = await getSignatariosById(requestData);
-    res.status(200).json(envelopeData);
+    const signatarios = await getSignatariosById(requestData);
+    res.status(200).json(signatarios);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -54,8 +54,8 @@ export const getEnvelopesByRepo = async (req: Request, res: Response) => {
 export const addSignatarioToEnvelope = async (req: Request, res: Response) => {
   try {
     const requestData = req.body;
-    const envelopeData = await addSignatario(requestData);
-    res.status(200).json(envelopeData);
+    const response = await addSignatario(requestData);
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -64,19 +64,19 @@ export const addSignatarioToEnvelope = async (req: Request, res: Response) => {
 export const forwardEnvelopeForSignature = async (req: Request, res: Response) => {
   try {
     const requestData = req.body;
-    const envelopeData = await forwardForSignature(requestData);
-    res.status(200).json(envelopeData);
+    const response = await forwardForSignature(requestData);
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-export const uploadDocumento = async (req: Request, res: Response) => {
+export const uploadDocument = async (req: Request, res: Response) => {
   if (!req.file) {
     return res.status(400).send('Nenhum arquivo foi enviado.');
   }
   try {
-    const fileInfo = await processUploadDocumento(req.file);
+    const fileInfo = await processUploadDocument(req.file);
     res.status(200).json({
       message: 'Arquivo enviado com sucesso',
       fileInfo: fileInfo,
@@ -87,10 +87,10 @@ export const uploadDocumento = async (req: Request, res: Response) => {
   }
 };
 
-export const buscarDocumentoByEnvelopeId = async (req: Request, res: Response) => {
+export const findDocumentByEnvelopeId = async (req: Request, res: Response) => {
   try {
     const requestData = req.body;
-    const documento = await buscarDocumento(requestData.params.envelope_id);
+    const documento = await findDocument(requestData.params.envelope_id);
     res.status(200).json(documento);
   } catch (error) {
     res.status(500).json({ error: error.message });

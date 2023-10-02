@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
-import { APIData, APIResponse, EnvelopeApiResponse } from '../types/api';
-import { apiURL } from '../../utils/api';
-import { createDocumentoInDatabase, createEnvelopeInDatabase, getDocumentoByEnvelopeId } from '../../database/envelope';
 import fs from 'fs';
+import { apiURL } from '../../utils/api';
+import { APIData, APIResponse, EnvelopeApiResponse } from '../types/api';
+import { createDocumentInDatabase, createEnvelopeInDatabase, getDocumentByEnvelopeId } from '../../database/envelope';
 import { FormEnvelopeData } from './types';
 
 
@@ -18,7 +18,7 @@ export const newEnvelope = async (data: FormEnvelopeData): Promise<APIResponse> 
 
     if (response.status === 200) {
       await createEnvelopeInDatabase(response.data, data.token);
-      await createDocumentoInDatabase(doc, response.data.response.data.idEnvelope);
+      await createDocumentInDatabase(doc, response.data.response.data.idEnvelope);
       return {
         status: response.status,
         data: response.data,
@@ -27,7 +27,6 @@ export const newEnvelope = async (data: FormEnvelopeData): Promise<APIResponse> 
       throw new Error(JSON.stringify(response.data));
     }
   } catch (error) {
-    console.error(error);
     throw new Error(error.response.data.error);
   }
 };
@@ -148,7 +147,7 @@ export const forwardForSignature = async (data: APIData): Promise<APIResponse> =
 };
 
 
-export const processUploadDocumento = (file: Express.Multer.File): Promise<any> => {
+export const processUploadDocument = (file: Express.Multer.File): Promise<any> => {
   return new Promise((resolve, reject) => {
     const nomeArquivo = file.originalname;
     const mimeType = file.mimetype;
@@ -165,9 +164,9 @@ export const processUploadDocumento = (file: Express.Multer.File): Promise<any> 
 };
 
 
-export const buscarDocumento = async (envelope_id: string): Promise<APIResponse> => {
+export const findDocument = async (envelope_id: string): Promise<APIResponse> => {
   try {
-    const documentos = await getDocumentoByEnvelopeId(envelope_id);
+    const documentos = await getDocumentByEnvelopeId(envelope_id);
 
     return {
       status: 200,

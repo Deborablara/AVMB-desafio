@@ -1,10 +1,10 @@
 import express, { Router } from 'express';
-import { getDadosRepositorio } from '../controllers/repositorio';
+import { getRepositoryData } from '../controllers/repositorio';
 
 
 const repositorioRouter: Router = express.Router();
 
-repositorioRouter.post('/id', getDadosRepositorio);
+repositorioRouter.post('/id', getRepositoryData);
 
 
 export default repositorioRouter;

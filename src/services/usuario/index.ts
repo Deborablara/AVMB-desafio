@@ -22,7 +22,7 @@ export const getId = async (data: any) => {
   }
 };
 
-export const getUsuario = async (data: any) => {
+export const getUser = async (data: any) => {
   try {
     const url: string = `${apiURL}getDadosUsuario`;
 
